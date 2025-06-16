@@ -1,6 +1,13 @@
 const { loginDB, registerDB } = require("../services/auth.service");
 
 const login = async (req, res) => {
+  if (!req.body) {
+    return res.status(400).json({
+      success: false,
+      message: "Request body is required!",
+    });
+  }
+
   const { username, password } = req.body;
   if (!username || !password) {
     return res.status(400).json({
